@@ -64,6 +64,13 @@ def delete_task(task_id):
     return redirect(url_for('get_task'))
 
 
+@app.route('/get_categories')
+def get_categories():
+    _categories = mongo.db.categories.find()
+    category_list = [category for category in _categories]
+    return render_template('categories.html', categories = category_list)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
